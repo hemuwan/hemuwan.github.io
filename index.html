@@ -5,8 +5,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>I'm hemuwan</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 </head>
 <body>
     <p>こんにちは</p>
+       <p>masaki</p>
+    <div id="app">
+        {{ message }}
+    </div>
+
+    <div id="app-2">
+        <span v-bind:title="message">
+            ここにマウスホバーすると値が見れるよ
+        </span>        
+    </div>
+
+    <div id="app-3">
+        <p>コンソールにapp3.seen = false;と打ち込むと↓が消える。</p>
+        <span v-if="seen">Now you see me</span>
+    </div>
+
+    <div id="app-4">
+        <p>
+            for分も組み込める v-forをタグに埋め込む。<br>
+            コンソールにapp4.todos.push({ text: 'new item' });で新しい要素できる。
+        </p>
+        <ol>
+            <li v-for="todo in todos">
+                {{ todo.text }}
+            </li>
+        </ol>
+    </div>
+
+    <div id="app-5"> 
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessage">言葉を反転</button>
+    </div>
+
+    <div id="app-6">
+        <p>{{ message }}</p>
+        <input v-model="message">
+    </div>
+
+    <div id="app-7">
+        <ol>
+            <!--
+                各todo-item の内容を表す todo オブジェクトを与える。
+                これにより、内容は動的に変化する。
+                後述の key を各コンポーネントに提供する必要がある。
+            -->
+            <todo-item
+                v-for="item in groceryList"
+                v-bind:todo="item"
+                v-bind:key="item.id"
+            ></todo-item>
+        </ol>
+    </div>
 </body>
 </html>
