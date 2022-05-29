@@ -1,0 +1,20 @@
+<html lang="ja"><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm hemuwan</title>
+    
+</head>
+<body>
+  <p id="test">ID=testのｐタグ。<span id="span1"></span></p>
+    <textarea id="textarea1" value="1" cols="50" rows="5" maxlength="15">テスト</textarea>
+    <input type="button" value="ボタン" onclick"btnFunc()" />
+  
+  <script>
+    function btnFunc(){
+      const ta1 = document.getElementbyId("textarea1").value;
+      document.getElementById("span1").textContent ~ ta1;
+    }
+  </script>  
+</body>
+</html>
