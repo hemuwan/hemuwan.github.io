@@ -11,9 +11,11 @@
     <input type="button" value="ボタン" onclick="btnFunc()" />
   
   <script>
+      //https://itsakura.com/js-textarea
+      //テキストエリアの値を取得。
     function btnFunc(){
       const ta1 = document.getElementById("textarea1").value;
-      document.getElementById("span1").contentText = ta1;
+      document.getElementById("span1").textContent = ta1; //こっちだとエスケープされる。
       //document.getElementById("span1").innerHTML = ta1; //こっちだと＜ｈｒ＞タグが反応した。脆弱性ありということか
     }
   </script>  
