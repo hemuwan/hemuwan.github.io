@@ -1,0 +1,53 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#flow {
+  width: 80vw;
+  height: 80vh;
+  border: solid 0.1px black;
+  border-radius: 10px;
+  margin: 40px 50px;
+  overflow: scroll;
+  position: relative;
+
+  .wrapper {
+    width: max-content;
+    height: max-content;
+    position: relative;
+  }
+
+  .pathmap {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+  }
+
+  .stepContainer {
+    display: flex;
+    justify-content: center;
+    height: max-content;
+    padding: 6vh 4vw;
+    position: relative;
+    z-index: 1;
+  }
+
+  .inputContainer {
+    position: relative;
+    min-height: 5vh;
+    min-width: 5vw;
+    z-index: 1;
+    margin: 0 16px;
+    background-color: #7bf6ff;
+    border: solid 1px #000;
+    border-radius: 8px;
+
+    .innerFieldset {
+      border: none;
+    }
+  }
+
+}
