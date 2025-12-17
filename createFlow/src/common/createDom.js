@@ -3,7 +3,7 @@ const createDom = (htmltext) => {
   dom.innerHTML = dom.body.innerHTML.split('\n')
     .map(line => line.trim())
     .join('');
-  return dom.body;
+  return dom.body.firstChild;
 }
 
 export default createDom;
