@@ -9,7 +9,7 @@ const ref = (v) => {
       val = newValue;
       fn.forEach(f => f(val));
     },
-    subscribe: (f) => {
+    effect: (f) => {
       f(val);
       fn.push(f);
       // return () => fn.filter(fn => fn !== f);
