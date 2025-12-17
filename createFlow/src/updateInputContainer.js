@@ -20,6 +20,30 @@ const updateInputContainer = (managedData) => {
 
   updatePath(data);
 
+  // btnにイベント追加
+  [...document.querySelectorAll('.inputContainer + button, button:has(+ .inputContainer)')].forEach(btn => {
+    btn.onclick = (event) => {
+      const stepContainer = event.target.closest('.stepContainer');
+      const step = parseInt(stepContainer.getAttribute('step'));
+      const newInputId = 10;// generateId('input', data.map(x => x.input_id));
+      const newInputData = {
+        input_id: newInputId,
+        step: step,
+        title: 'New Input',
+        type: 'text',
+        content: [
+          {
+            display: 'New Input',
+            value: '',
+            next_input_id: ''
+          }
+        ]
+      };
+      managedData.value.push(newInputData);
+      updateInputContainer(managedData);
+    };
+  });
+
   // イベントデリゲート、hiddenに値が入るように  
   // [...document.getElementsByClassName('step')].forEach(x => {
   //   x.oninput = (event) => {

@@ -45,6 +45,7 @@ const setListInput = ({input_id, type, name, content}) => parseDOM( type === 'se
 );
 
 const setInputContainer = (inputData) => parseDOM(`
+  <button>+</button>
   <div
     class="inputContainer"
     input_id="${inputData.input_id}"
@@ -55,4 +56,5 @@ const setInputContainer = (inputData) => parseDOM(`
       ${inputData.type === 'text' ? setSingleInput(inputData) : setListInput(inputData)}
     </fieldset>
   </div>
+  <button>+</button>
 `);
