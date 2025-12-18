@@ -1,13 +1,18 @@
 
 // 線と矢印の描画
-const createPath = () => document.createElementNS('http://www.w3.org/2000/svg', 'path');
+const createSvg = (name, config) => {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', name);
+  Object.entries(config || {}).forEach(([key, value]) => svg.setAttribute(key, value));
+  return svg;
+}
+
 const updatePath = (data) => {
   // 描画領域を取得
-  const parent = document.getElementById('flow');
+  const [parent] = document.getElementsByClassName('viewerBody');
   const [pathmap] = parent.getElementsByClassName('pathmap');
 
   // pathmap内の既存の線をすべて削除
-  [...pathmap.getElementsByTagName('path')].forEach(x => x.remove());
+  pathmap.innerHTML = '';
 
   // 計算のためpathの高さを取得
   const stepHalfHeight = parent.getElementsByClassName('inputContainer')[0].offsetHeight / 2;
@@ -33,12 +38,27 @@ const updatePath = (data) => {
         y: start.y + stepHalfHeight - 20
       };
 
+      const svgColor = {
+        primary: 'blue'
+        , primary_light: '#add8e6'
+      };
+
+      // 開始地点の丸を描画
+      pathmap.append(createSvg('circle', {
+        'cx': start.x
+        , 'cy': start.y
+        , 'r': 5
+        , 'fill': svgColor.primary
+        , 'stroke': svgColor.primary_light
+        , 'stroke-width': 2
+      }));
+
       // next_input_id ごとに線を引く
       inputData.content?.map(x => x.next_input_id).forEach(next_input_id => {
         const next_input_data = data.find(x => x.input_id == next_input_id);
         if (!next_input_data) return;
 
-        const pathColor = 'blue';
+        const pathColor = svgColor.primary;
 
         const target = parent.querySelector(`.inputContainer[input_id="${next_input_id}"]`);
         const targetRect = target.getBoundingClientRect();
@@ -46,26 +66,6 @@ const updatePath = (data) => {
           x: targetRect.left + targetRect.width / 2 - parentRect.left + scrollLeft
           , y: targetRect.top - 5 - parentRect.top + scrollTop
         };
-
-        // 開始地点の丸
-        // const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        // circle.setAttribute('cx', start.x);
-        // circle.setAttribute('cy', start.y);
-        // circle.setAttribute('r', 5);
-        // circle.setAttribute('fill', pathColor);
-        // circle.setAttribute('stroke', '#acacac');
-        // circle.setAttribute('stroke-width', 2);
-        // pathmap.appendChild(circle);
-        pathmap.innerHTML += parseDOM(`
-          <circle
-            cx="${start.x}"
-            cy="${start.y}"
-            r="5"
-            fill="${pathColor}"
-            stroke="#acacac"
-            stroke-width="2"
-          />
-        `)
 
         // パスの定義
         let d = []
@@ -111,24 +111,27 @@ const updatePath = (data) => {
         }
 
         // パスの作成と属性設定
-        const path = createPath();
-        path.setAttribute('d', d.join(' '));
-        path.setAttribute('stroke', pathColor);
-        path.setAttribute('fill', 'none')
+
+        const path = createSvg('path', {
+          'd': d.join(' ')
+          , 'stroke': pathColor
+          , 'fill': 'none'
+        });
 
         // 矢印部分のパス定義
-        const arrow = createPath();
-        arrow.setAttribute('d', [
-          'M'
-          , end.x, end.y
-          , 'L'
-          , end.x - 15, end.y - 10
-          , 'H'
-          , end.x + 15
-          , 'Z'
-        ].join(' '));
-        arrow.setAttribute('stroke', pathColor);
-        arrow.setAttribute('fill', pathColor);
+        const arrow = createSvg('path', {
+          'd': [
+            'M'
+            , end.x, end.y
+            , 'L'
+            , end.x - 15, end.y - 10
+            , 'H'
+            , end.x + 15
+            , 'Z'
+          ].join(' ')
+          , 'stroke': pathColor
+          , 'fill': pathColor
+        });
 
         pathmap.append(path, arrow);
       });
@@ -186,13 +189,13 @@ const updatePath = (data) => {
   //       }
 
   //       // パスの作成と属性設定
-  //       const path = createPath();
+  //       const path = createSvg();
   //       path.setAttribute('d', d);
   //       path.setAttribute('stroke', pathColor);
   //       path.setAttribute('fill', 'none')
 
   //       // 矢印部分のパス定義
-  //       const arrow = createPath();
+  //       const arrow = createSvg();
   //       arrow.setAttribute('d', [
   //         'M', endX, endY,
   //         'L', endX - 15, endY - 10,

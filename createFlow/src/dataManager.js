@@ -2,6 +2,7 @@
   //   input_id: 1
   //   , title: "フローの作成を開始する"
   //   , step: 1
+  //   , col_num: 1
   //   , type: "text"
   //   , name: "text_input"
   //   , content: [

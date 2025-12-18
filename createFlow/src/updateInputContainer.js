@@ -1,8 +1,9 @@
 // 入力フィールドのコンテナと空白用のコンテナを作成
-const updateInputContainer = (managedData) => {
-  const data = managedData.value;
+const updateInputContainer = (manager) => {
+  const data = manager.value;
+  const viewer = document.querySelector('.flowViewer');
   // 既存の step, path を削除
-  [...document.getElementsByClassName('stepContainer')].forEach(x => x.remove());
+  [...viewer.getElementsByClassName('stepContainer')].forEach(x => x.remove());
 
   // stepを取り出し、照準ソート、重複を削除
   // stepごとにinputContainerを追加していく
@@ -15,52 +16,8 @@ const updateInputContainer = (managedData) => {
     step.setAttribute('step', stepNum);
     filtered.forEach(inputData => step.innerHTML += setInputContainer(inputData));
 
-    document.getElementById('flow').querySelector('.wrapper').append(step);
+    viewer.querySelector('.wrapper').append(step);
   });
 
   updatePath(data);
-
-  // btnにイベント追加
-  [...document.querySelectorAll('.inputContainer + button, button:has(+ .inputContainer)')].forEach(btn => {
-    btn.onclick = (event) => {
-      const stepContainer = event.target.closest('.stepContainer');
-      const step = parseInt(stepContainer.getAttribute('step'));
-      const newInputId = 10;// generateId('input', data.map(x => x.input_id));
-      const newInputData = {
-        input_id: newInputId,
-        step: step,
-        title: 'New Input',
-        type: 'text',
-        content: [
-          {
-            display: 'New Input',
-            value: '',
-            next_input_id: ''
-          }
-        ]
-      };
-      managedData.value.push(newInputData);
-      updateInputContainer(managedData);
-    };
-  });
-
-  // イベントデリゲート、hiddenに値が入るように  
-  // [...document.getElementsByClassName('step')].forEach(x => {
-  //   x.oninput = (event) => {
-  //     const target = event.target; 
-  //     if (target.tagName === 'INPUT') {
-  //       const input_id = target.getAttribute('input_id');
-  //       const hidden = document.querySelector(`input[type="hidden"][input_id="${input_id}"]`)
-  //       hidden.setAttribute('next_input_id', target.getAttribute('next_input_id'));
-  //       hidden.setAttribute('value', target.value);
-  //     } else if (target.tagName === 'SELECT') {
-  //       const selectOption = target.options[target.selectedIndex];
-  //       const input_id = selectOption.getAttribute('input_id')
-  //       const hidden = document.querySelector(`input[type="hidden"][input_id="${input_id}"]`)
-  //       hidden.setAttribute('next_input_id', selectOption.getAttribute('next_input_id'));
-  //       hidden.setAttribute('value', selectOption.getAttribute('value'));
-  //     }
-  //     updatePath();
-  //   }
-  // });
 }

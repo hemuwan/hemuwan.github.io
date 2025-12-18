@@ -3,6 +3,7 @@ const sampleData = [
     input_id: 1
     , title: "フローの作成を開始する"
     , step: 1
+    , col_num: 1
     , type: "text"
     , name: "text_input"
     , content: [
@@ -17,6 +18,7 @@ const sampleData = [
     input_id: 2
     , title: "選択肢を選んでください"
     , step: 2
+    , col_num: 1
     , type: "radio"
     , name: "radio_input"
     , content: [
@@ -36,6 +38,7 @@ const sampleData = [
     input_id: 3
     , title: "選択肢Aが選ばれました"
     , step: 3
+    , col_num: 1
     , type: "checkbox"
     , name: "checkbox_input"
     , content: [
@@ -55,6 +58,7 @@ const sampleData = [
     input_id: 4
     , title: "選択肢Bが選ばれました"
     , step: 3
+    , col_num: 2
     , type: "select"
     , name: "select_input"
     , content: [

@@ -4,50 +4,130 @@ body {
   padding: 0;
 }
 
-#flow {
-  width: 80vw;
-  height: 80vh;
-  border: solid 0.1px black;
-  border-radius: 10px;
-  margin: 40px 50px;
-  overflow: scroll;
-  position: relative;
+#app {
+  .appContent {
+    .appHeader {
+      width: 100%;
+      height: 10vh;
+      border-bottom: solid 0.1px black;
+      background-color: #c0ffee;
+      display: flex;
+      align-items: center;
+      padding-left: 50px;
+      box-sizing: border-box;
+      font-size: 24px;
+      font-weight: bold;
 
-  .wrapper {
-    width: max-content;
-    height: max-content;
-    position: relative;
-  }
+      .appHeaderControl {
+        flex: 4;
+      }
 
-  .pathmap {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    z-index: 0;
-  }
+      .appHeaderInformation {
+        flex: 1;
+      }
+    }
 
-  .stepContainer {
-    display: flex;
-    justify-content: center;
-    height: max-content;
-    padding: 6vh 4vw;
-    position: relative;
-    z-index: 1;
-  }
+    .appBody {
+      width: 100%;
+      height: 85vh;
+      display: flex;
 
-  .inputContainer {
-    position: relative;
-    min-height: 5vh;
-    min-width: 5vw;
-    z-index: 1;
-    margin: 0 16px;
-    background-color: #7bf6ff;
-    border: solid 1px #000;
-    border-radius: 8px;
+      .flowViewer {
+        height: 85vh;
+        width: 70vw;
+        margin: 2vh 1vw 2vh 1vw;
 
-    .innerFieldset {
-      border: none;
+        .viewerHeader {
+          border-radius: 5px 5px 0 0;
+          border: solid 0.1px black;
+          border-bottom: none;
+          background-color: #decafe;
+          height: 6vh;
+
+          h2 {
+            margin: 0;
+            padding: 10px;
+            font-size: 18px;
+          }
+        }
+
+        .viewerBody {
+          height: 75vh;
+          border-radius: 0 0 5px 5px;
+          border: solid 0.1px black;
+          border-top: none;
+          overflow: scroll;
+          position: relative;
+
+          .pathmap {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            z-index: 0;
+          }
+
+          .wrapper {
+            width: max-content;
+            height: max-content;
+            position: relative;
+
+
+
+            .stepContainer {
+              display: flex;
+              justify-content: center;
+              height: max-content;
+              padding: 6vh 4vw;
+              position: relative;
+              z-index: 1;
+            }
+
+            .inputContainer {
+              position: relative;
+              min-height: 5vh;
+              min-width: 5vw;
+              z-index: 1;
+              margin: 0 16px;
+              background-color: #7bf6ff;
+              border: solid 1px #000;
+              border-radius: 8px;
+
+              .innerFieldset {
+                border: none;
+              }
+            }
+          }
+        }
+      }
+
+      .flowEditor {
+        height: 85vh;
+        width: 27vw;
+        margin: 2vh 1vw 2vh 0vw;
+
+        .flowEditorHeader {
+          border-radius: 5px 5px 0 0;
+          border: solid 0.1px black;
+          border-bottom: none;
+          background-color: #decafe;
+          height: 6vh;
+
+          h2 {
+            margin: 0;
+            padding: 10px;
+            font-size: 18px;
+          }
+        }
+
+        .flowEditorBody {
+          padding: 10px;
+          overflow-y: scroll;
+          height: 75vh;
+          border-radius: 0 0 5px 5px;
+          border: solid 0.1px black;
+          border-top: none;
+        }
+      }
     }
   }
-
 }
