@@ -43,18 +43,22 @@ const updatePath = (data) => {
         , primary_light: '#add8e6'
       };
 
+      const next_input_ids = inputData.content?.map(x => x.next_input_id) || [];
+
       // 開始地点の丸を描画
-      pathmap.append(createSvg('circle', {
-        'cx': start.x
-        , 'cy': start.y
-        , 'r': 5
-        , 'fill': svgColor.primary
-        , 'stroke': svgColor.primary_light
-        , 'stroke-width': 2
-      }));
+      if (next_input_ids.length > 0) {
+        pathmap.append(createSvg('circle', {
+          'cx': start.x
+          , 'cy': start.y
+          , 'r': 5
+          , 'fill': svgColor.primary
+          , 'stroke': svgColor.primary_light
+          , 'stroke-width': 2
+        }));
+      }
 
       // next_input_id ごとに線を引く
-      inputData.content?.map(x => x.next_input_id).forEach(next_input_id => {
+      next_input_ids.forEach(next_input_id => {
         const next_input_data = data.find(x => x.input_id == next_input_id);
         if (!next_input_data) return;
 
