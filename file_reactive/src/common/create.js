@@ -1,13 +1,15 @@
 // document.body を返す関数
 store.common.create = ({data = {}, func = {}, components = {}, template = ""}) => { // 必ず1つタグにまとめる。
-  // 引数に渡したcomponents からコンポーネントを取り出してtemplate に組み込む処理が欲しい。
-  // .tagName でとれる名前は全部大文字になっている。変数にハイフン使えない
-  // key をUpperにする処理を挟んでおく
-  const keyedComponent = Object.fromEntries( // 二重配列からオブジェクトを作る関数
-    Object.keys(components).map(key => [key.toUpperCase(), components[key]])
-  );
-
+  // コンポーネントを再帰的に挿入していく関数
   const insertComponent = (doc) => {
+    // 引数に渡したcomponents からコンポーネントを取り出してtemplate に組み込む処理が欲しい。
+    // .tagName でとれる名前は全部大文字になっている。変数にハイフン使えない
+    // key をUpperにする処理を挟んでおく
+    const keyedComponent = Object.fromEntries( // 二重配列からオブジェクトを作る関数
+      Object
+        .entries(components)
+        .map(([key, value]) => [key.toUpperCase(), value])
+    );
     [...doc.children].forEach(elm => {
       if (keyedComponent[elm.tagName] != undefined) {
         // すべての属性とその値を取り出し、key:value の形に。
@@ -45,7 +47,8 @@ store.common.create = ({data = {}, func = {}, components = {}, template = ""}) =
   const tagFunc = (doc) => {
     [...doc.children].forEach(elm => {
       // 文字列が登録されているイベントを取り出してそれぞれ関数をバインド
-      [...elm.attributes].filter(x => x.name.match(/on.*/) != null).forEach(event => {
+      // [...elm.attributes].filter(x => x.name.match(/on.*/) != null).forEach(event => {
+      [...elm.attributes].filter(x => x.name.indexOf('on') >= 0).forEach(event => {
         if (elm.getAttribute(event.name)) {
           const key = elm.getAttribute(event.name).trim();
           elm.removeAttribute(event.name);
@@ -63,42 +66,33 @@ store.common.create = ({data = {}, func = {}, components = {}, template = ""}) =
   // 再帰的にマスタッシュ構文のref を見つけて、更新関数を入れていく。
   const mustache = (doc) => {
     [...doc.childNodes].forEach(node => {
-      switch (node.nodeType) {
-        case Node.ELEMENT_NODE:
-          // タグ要素なら再帰的に処理する。
-          mustache(node);
-          break;
-        case Node.TEXT_NODE:
-          // マスタッシュ構文が見つからないなら処理を抜ける。
-          if (node.textContent.match(/{{.*}}/) == null) break;
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        // タグ要素なら再帰的に処理する。
+        mustache(node);
+      } else if (node.nodeType === Node.TEXT_NODE) {
+        // マスタッシュ構文が見つからないなら処理を抜ける。
+        if (node.textContent.match(/{{.*}}/) == null) return;
 
-          // マスタッシュ構文とそれ以外で分ける。
-          const splited = node.textContent.match(/({{.*}}|[^{{.*}}]*)/g);
-          
-          // マスタッシュ構文を該当する ref オブジェクトと入れ替える。
-          const maped = splited.map(elm => {
-            return elm.match(/{{.*}}/) != null
-              ? data[elm.replace(/({{|}})/g, "").trim()]
-              : elm;
-          });
-          
-          // マスタッシュ構文で書かれているところのリストを作る。重複も含める。
-          const mustaches = node.textContent.match(/{{.*}}/g).map(m => m.replace(/({{|}})/g, "").trim());
-          // 取り出したものを重複なくし、それぞれのeffect に innerHTML 更新の関数を入れる。
-          [...new Set(mustaches)].forEach(key => {
-            if (data[key] == undefined) {
-              console.log("ref notfound", data, key);
-              return;
-            }
-            data[key].effect = () => {
-              node.textContent = maped.map(elm => 
-                typeof elm === "object" 
-                ? elm.value 
-                : elm
-              ).join("");
-            }
-          })
-          break;
+        // マスタッシュ構文とそれ以外で分ける。
+        const splited = node.textContent.match(/({{.*}}|[^{{.*}}]*)/g);
+        
+        // マスタッシュ構文で書かれているところのリストを作る。重複も含める。
+        const mustaches = node.textContent.match(/{{.*}}/g).map(m => m.replace(/({{|}})/g, "").trim());
+        // 取り出したものを重複なくし、それぞれのeffect に innerHTML 更新の関数を入れる。
+        [...new Set(mustaches)].forEach(key => {
+          if (data[key] == undefined) {
+            // childtext にprop 渡して、その中で更に mustache 使う場合にここに来てしまう。
+            console.log("ref notfound", data, key);
+            return;
+          }
+          data[key].effect = () => {
+            node.textContent = splited.map(elm => 
+              elm.match(/{{.*}}/) != null
+              ? data[elm.replace(/({{|}})/g, "").trim()].value
+              : elm
+            ).join("");
+          }
+        });
       }
     });
 
@@ -148,8 +142,12 @@ store.common.create = ({data = {}, func = {}, components = {}, template = ""}) =
     return doc;
   }
 
+  // メイン処理
   const doc = new DOMParser().parseFromString(template, "text/html"); // タグ内の改行空白は除去される
-  doc.body.innerHTML = doc.body.innerHTML.split("\n").map(x => x.trim()).join(""); // タグ外の余計な空白改行を削除。
+  doc.body.innerHTML = doc.body.innerHTML
+    .split("\n")
+    .map(x => x.trim())
+    .join(""); // タグ外の余計な空白改行を削除。
   const insered = insertComponent(doc);
   const funced = tagFunc(insered);
   const mustached = mustache(funced);

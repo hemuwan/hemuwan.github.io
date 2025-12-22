@@ -69,7 +69,7 @@ document.getElementById("app").append((() => {
         <InputTime
           prop="count"
         >
-        child text content {{count_2}} !!
+          child text content {{count_2}} !!
         </InputTime>
         <div>
           count_2 : {{ count_2 }}

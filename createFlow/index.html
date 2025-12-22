@@ -9,8 +9,51 @@
 </head>
 
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <div class='appContent'>
+      <div class='appHeader'>
+        <h2>
+          Flow Creator
+        </h2>
+        <div class='appHeaderControl'>
+        </div>
+        <div class='appHeaderInformation'>
+          <div class='userInformation'>
+            User: Hemuwan
+          </div>
+        </div>
+      </div>
+      <div class='appBody'>
+        <div class='flowViewer'>
+          <div class='viewerHeader'>
+            <h2>
+              Flow Viewer
+            </h2>
+          </div>
+          <div class='viewerBody'>
+            <div class='wrapper'>
+              <svg class='pathmap'></svg>
+            </div>
+          </div>
+        </div>
+        <div class='flowEditor'>
+          <div class='flowEditorHeader'>
+            <h2>
+              Flow Editor
+            </h2>
+          </div>
+          <div class='flowEditorBody'>
+            <button class='addInputContainerbtn'>
+              Add Input Container
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src="./src/data.js"></script>
+  <script src="./src/events/addInputContainer.js"></script>
+  <script src="./src/events/removeInputContainer.js"></script>
   <script src="./src/common.js"></script>
   <script src="./src/dataManager.js"></script>
   <script src="./src/updateInputContainer.js"></script>

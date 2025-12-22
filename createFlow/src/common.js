@@ -50,6 +50,14 @@ const setInputContainer = (inputData) => parseDOM(`
     input_id="${inputData.input_id}"
     step="${inputData.step}"
   >
+    <div class='inputContainerHeaeder'>
+      <div class='inputContainerTitle'>    
+        ${inputData.title}
+      </div>
+      <div class='inputContainerDeleteBtn'>
+        ✕
+      </div>
+    </div>
     <fieldset>
       <legend>${inputData.title}</legend>
       ${inputData.type === 'text' ? setSingleInput(inputData) : setListInput(inputData)}

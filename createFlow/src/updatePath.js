@@ -43,7 +43,13 @@ const updatePath = (data) => {
         , primary_light: '#add8e6'
       };
 
-      const next_input_ids = inputData.content?.map(x => x.next_input_id) || [];
+      if (!inputData.content) {
+        inputData.content = [];
+      }
+
+      const next_input_ids = inputData.content
+        .map(x => x.next_input_id)
+        .filter(x => x);
 
       // 開始地点の丸を描画
       if (next_input_ids.length > 0) {
