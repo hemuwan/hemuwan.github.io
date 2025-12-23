@@ -146,9 +146,53 @@ body {
         }
 
         .flowEditorBody {
-          padding: 10px;
-          height: 80vh;
+          padding: 10px 4px 10px 10px;
+          height: 77vh;
           overflow-y: scroll;
+
+          .flowEditorSelectItems {
+            padding: 8px;
+            background: #acacac;
+            margin-bottom: 8px;
+            
+            .itemTitle{
+              position: relative;
+              padding: 4px;
+
+              div {
+                font-size: 12px;
+              }
+
+              input, select {
+                width: 96%;
+              }
+            }
+
+            .itemSelect {
+              position: relative;
+              padding: 4px;
+
+              div {
+                font-size: 12px;
+              }
+
+              input, select {
+                width: 100%;
+              }
+            }
+          }
+
+          .flowEditorAddSelectItemBtn {
+            padding: 4px;
+            text-align: center;
+            background: #b2ffc4;
+            cursor: pointer;
+
+
+            &:hover {
+              filter: brightness(70%);
+            }
+          }
         }
       }
     }

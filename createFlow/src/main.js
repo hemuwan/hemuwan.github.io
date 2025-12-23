@@ -26,4 +26,4 @@ app.getElementsByClassName('wrapper')[0].onclick = (event) => {
 // 初期表示
 updateInputContainer(managedData);
 // ウィンドウリサイズ時にパスを更新
-window.addEventListener('resize', () => updatePath(managedData));
+window.addEventListener('resize', () => updatePathmap(managedData));
