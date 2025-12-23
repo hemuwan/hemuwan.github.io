@@ -9,15 +9,21 @@ let managedData = sampleData;
 
 // イベント移譲で動的に増減する要素にイベント追加
 app.getElementsByClassName('wrapper')[0].onclick = (event) => {
-  const target = event.target;
-  if (target.classList.contains('addInputContainerBtn')) {
+  const {target} = event;
+  const {classList} = target;
+  // 親に向かって探索
+  const inputContainer = target.closest('.inputContainer');
+
+  if (classList.contains('addInputContainerBtn')) {
     addInputContainer(target);
-  } else if (target.classList.contains('inputContainerDeleteBtn')) {
+  } else if (classList.contains('inputContainerDeleteBtn')) {
     removeInputContainer(target);
-  } else if (target.classList.contains('inputContainer')) {
-    viewInputEditor
+  } else if (inputContainer) {
+    viewInputEditor(inputContainer);
   }
 }
 
+// 初期表示
 updateInputContainer(managedData);
+// ウィンドウリサイズ時にパスを更新
 window.addEventListener('resize', () => updatePath(managedData));

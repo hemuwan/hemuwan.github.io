@@ -1,4 +1,3 @@
-
 // 線と矢印の描画
 const createSvg = (name, config) => {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', name);
@@ -6,7 +5,8 @@ const createSvg = (name, config) => {
   return svg;
 }
 
-const updatePath = (data) => {
+const updatePathmap = (data) => {
+  
   // 描画領域を取得
   const [parent] = document.getElementsByClassName('viewerBody');
   const [pathmap] = parent.getElementsByClassName('pathmap');

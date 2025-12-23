@@ -43,21 +43,33 @@
             </h2>
           </div>
           <div class='flowEditorBody'>
-            <button class='addInputContainerbtn'>
-              Add Input Container
-            </button>
+            <div>
+              
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <script src="./src/data.js"></script>
-  <script src="./src/events/addInputContainer.js"></script>
-  <script src="./src/events/removeInputContainer.js"></script>
-  <script src="./src/common.js"></script>
-  <script src="./src/dataManager.js"></script>
-  <script src="./src/updateInputContainer.js"></script>
-  <script src="./src/updatePath.js"></script>
+  <!-- common -->
+  <script src="./src/common/parseDom.js"></script>
+  <script src="./src/common/setInputContainer.js"></script>
+
+  <!-- data -->
+  <script src="./src/data/data.js"></script>
+  <script src="./src/data/dataManager.js"></script>
+
+  <!-- components -->
+  <!-- inputContainer -->
+  <script src="./src/components/inputContainer/add.js"></script>
+  <script src="./src/components/inputContainer/remove.js"></script>
+  <script src="./src/components/inputContainer/update.js"></script>
+
+  <!-- pathmap -->
+  <script src="./src/components/pathmap/update.js"></script>
+
+  <!-- flowEditor -->
+  <script src="./src/components/flowEditor/update.js"></script>
 
   <script src="./src/main.js"></script>
 </body>

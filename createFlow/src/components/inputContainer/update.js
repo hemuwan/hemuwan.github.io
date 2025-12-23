@@ -47,5 +47,5 @@ const updateInputContainer = (data) => {
     viewer.querySelector('.wrapper').append(step);
   });
 
-  updatePath(data);
+  updatePathmap(data);
 }
