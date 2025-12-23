@@ -154,30 +154,52 @@ body {
             padding: 8px;
             background: #acacac;
             margin-bottom: 8px;
-            
-            .itemTitle{
-              position: relative;
-              padding: 4px;
+            position: relative;
+            display: flex;
 
-              div {
-                font-size: 12px;
+            .itemContent {
+              flex: 6;
+
+              .itemTitle{
+                position: relative;
+                padding: 4px;
+
+                div {
+                  font-size: 12px;
+                }
+
+                input, select {
+                  width: 96%;
+                }
               }
 
-              input, select {
-                width: 96%;
+              .itemSelect {
+                position: relative;
+                padding: 4px;
+
+                div {
+                  font-size: 12px;
+                }
+
+                input, select {
+                  width: 100%;
+                }
               }
             }
 
-            .itemSelect {
-              position: relative;
-              padding: 4px;
 
-              div {
-                font-size: 12px;
-              }
+            .flowEditorSelectItemsRemoveBtn {
+              flex: 1;
+              background: #ff7b7b;
+              cursor: pointer;
+              font-weight: bold;
+              padding: 2px;
+              text-align: center;
+              border: solid 0.1px #ffffff;
+              line-height: 18px;
 
-              input, select {
-                width: 100%;
+              &:hover {
+                filter: invert(100%);
               }
             }
           }
