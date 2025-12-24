@@ -68,6 +68,7 @@ body {
             width: max-content;
             height: max-content;
             position: relative;
+            min-width: 100%;
 
             .stepContainer {
               display: flex;
@@ -150,61 +151,69 @@ body {
           height: 77vh;
           overflow-y: scroll;
 
-          .flowEditorSelectItems {
-            padding: 8px;
-            background: #acacac;
-            margin-bottom: 8px;
-            position: relative;
-            display: flex;
+          .selectItemWrapper {
 
-            .itemContent {
-              flex: 6;
+            .selectItem {
+              padding: 8px;
+              background: #acacac;
+              margin-bottom: 8px;
+              position: relative;
+              display: flex;
 
-              .itemTitle{
-                position: relative;
-                padding: 4px;
+              .itemContent {
+                flex: 7;
 
-                div {
-                  font-size: 12px;
+                .itemTitle {
+                  position: relative;
+                  padding: 4px;
+
+                  div {
+                    font-size: 12px;
+                  }
+
+                  input,
+                  select {
+                    width: 96%;
+                  }
                 }
 
-                input, select {
-                  width: 96%;
+                .itemSelect {
+                  position: relative;
+                  padding: 4px;
+
+                  div {
+                    font-size: 12px;
+                  }
+
+                  input,
+                  select {
+                    width: 100%;
+                  }
                 }
               }
 
-              .itemSelect {
-                position: relative;
-                padding: 4px;
 
-                div {
-                  font-size: 12px;
+              .removeSelectItemBtn {
+                flex: 1;
+                background: #ff7b7b;
+                cursor: pointer;
+                font-weight: bold;
+                padding: 2px;
+                text-align: center;
+                border: solid 0.1px #ffffff;
+                line-height: 18px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &:hover {
+                  filter: invert(100%);
                 }
-
-                input, select {
-                  width: 100%;
-                }
-              }
-            }
-
-
-            .flowEditorSelectItemsRemoveBtn {
-              flex: 1;
-              background: #ff7b7b;
-              cursor: pointer;
-              font-weight: bold;
-              padding: 2px;
-              text-align: center;
-              border: solid 0.1px #ffffff;
-              line-height: 18px;
-
-              &:hover {
-                filter: invert(100%);
               }
             }
           }
 
-          .flowEditorAddSelectItemBtn {
+          .addSelectItemBtn {
             padding: 4px;
             text-align: center;
             background: #b2ffc4;
@@ -215,6 +224,7 @@ body {
               filter: brightness(70%);
             }
           }
+          
         }
       }
     }

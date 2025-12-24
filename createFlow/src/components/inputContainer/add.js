@@ -1,8 +1,9 @@
 const addInputContainer = (target) => {
-   // addInputContainerBtn がクリックされた場合
+  // addInputContainerBtn がクリックされた場合
   const stepContainer = target.closest('.stepContainer');
   const step = parseInt(stepContainer.getAttribute('step'));
-  const newInputId = Math.max(...managedData.map(x => x.input_id)) + 1;
+  // MaxがNaNになる場合があるので対策として0を追加
+  const newInputId = Math.max(0, ...managedData.map(x => x.input_id)) + 1;
   const newInputData = {
     input_id: newInputId
     , step: step

@@ -15,7 +15,7 @@ const updatePathmap = (data) => {
   pathmap.innerHTML = '';
 
   // 計算のためpathの高さを取得
-  const stepHalfHeight = parent.getElementsByClassName('inputContainer')[0].offsetHeight / 2;
+  const stepHalfHeight = parent.getElementsByClassName('stepContainer')[0].offsetHeight / 4;
 
   const parentRect = parent.getBoundingClientRect();
   const { scrollTop, scrollLeft } = parent;

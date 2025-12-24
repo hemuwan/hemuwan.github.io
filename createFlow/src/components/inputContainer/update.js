@@ -5,11 +5,19 @@ const updateInputContainer = (data) => {
   // 既存の step, path を削除
   [...viewer.getElementsByClassName('stepContainer')].forEach(x => x.remove());
 
+  // 操作によりstepが飛んでしまう場合があるので、stepを詰める処理を追加
+  [...new Set(data.map(x => x.step))].sort().forEach((stepNum, i) => {
+    data
+      .filter(x => x.step === stepNum)
+      .forEach(x => x.step = i + 1);
+  });
+
   // stepを取り出し、照準ソート、重複を削除
   // stepごとにinputContainerを追加していく
   const stepList = [...new Set(data.map(x => x.step))];
-  // 最後に追加ボタン飲みのステップを入れる
-  const maxStepNum = Math.max(...stepList) + 1;
+
+  // 最後に追加ボタン飲みのステップを入れる -Infinity対策として最初に0を追加
+  const maxStepNum = Math.max(0, ...stepList) + 1;
   stepList.push(maxStepNum);
   stepList.sort().forEach(stepNum => {
     const filtered = data.filter(x => x.step === stepNum);

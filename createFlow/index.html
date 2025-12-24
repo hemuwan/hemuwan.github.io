@@ -65,83 +65,99 @@
               <legend>
                 選択肢の編集
               </legend>
-             
-              <div class="flowEditorSelectItems">
-                <div class="itemContent">
-                  <div class="itemTitle">
-                    <div>
-                      表示テキスト
+
+              <div class="selectItemWrapper">
+                <div class="selectItem">
+                  <div class="itemContent">
+                    <div class="itemTitle">
+                      <div>
+                        表示テキスト
+                      </div>
+                      <input type="text">
                     </div>
-                    <input type="text">
+                    <div class="itemSelect">
+                      <div>
+                        次の選択肢
+                      </div>
+                      <select>
+                        <option value="">終了</option>
+                        <option value="step1">ステップ1</option>
+                        <option value="step2">ステップ2</option>
+                        <option value="step3">ステップ3</option>
+                      </select>
+                    </div>
                   </div>
-                  <div class="itemSelect">
+                  <div class="removeSelectItemBtn">
                     <div>
-                      次の選択肢
+                      ✕
                     </div>
-                    <select>
-                      <option value="">終了</option>
-                      <option value="step1">ステップ1</option>
-                      <option value="step2">ステップ2</option>
-                      <option value="step3">ステップ3</option>
-                    </select>
                   </div>
                 </div>
-                <div class="flowEditorSelectItemsRemoveBtn">
-                  ✕
+
+                <div class="selectItem">
+                  <div class="itemContent">
+                    <div class="itemTitle">
+                      <div>
+                        表示テキスト
+                      </div>
+                      <input type="text">
+                    </div>
+                    <div class="itemSelect">
+                      <div>
+                        次の選択肢
+                      </div>
+                      <select>
+                        <option value="">終了</option>
+                        <option value="step1">ステップ1</option>
+                        <option value="step2">ステップ2</option>
+                        <option value="step3">ステップ3</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="removeSelectItemBtn">
+                    <div>
+                      ✕
+                    </div>
+                  </div>
+                </div>
+
+                <div class="selectItem">
+                  <div class="itemContent">
+                    <div class="itemTitle">
+                      <div>
+                        表示テキスト
+                      </div>
+                      <input type="text">
+                    </div>
+                    <div class="itemSelect">
+                      <div>
+                        次の選択肢
+                      </div>
+                      <select>
+                        <optgroup label="基本">
+                          <option value="">終了</option>
+                        </optgroup>
+                        <optgroup>
+                          <option value="step1">ステップ1</option>
+                          <option value="step2">ステップ2</option>
+                        </optgroup>
+                        <optgroup>
+                          <option value="step3">ステップ3</option>
+                        </optgroup>
+
+                      </select>
+                    </div>
+                  </div>
+                  <div class="removeSelectItemBtn">
+                    <div>
+                      ✕
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div class="flowEditorSelectItems">
-                <div class="itemContent">
-                  <div class="itemTitle">
-                    <div>
-                      表示テキスト
-                    </div>
-                    <input type="text">
-                  </div>
-                  <div class="itemSelect">
-                    <div>
-                      次の選択肢
-                    </div>
-                    <select>
-                      <option value="">終了</option>
-                      <option value="step1">ステップ1</option>
-                      <option value="step2">ステップ2</option>
-                      <option value="step3">ステップ3</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="flowEditorSelectItemsRemoveBtn">
-                  ✕
-                </div>
-              </div>
-              
-              <div class="flowEditorSelectItems">
-                <div class="itemContent">
-                  <div class="itemTitle">
-                    <div>
-                      表示テキスト
-                    </div>
-                    <input type="text">
-                  </div>
-                  <div class="itemSelect">
-                    <div>
-                      次の選択肢
-                    </div>
-                    <select>
-                      <option value="">終了</option>
-                      <option value="step1">ステップ1</option>
-                      <option value="step2">ステップ2</option>
-                      <option value="step3">ステップ3</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="flowEditorSelectItemsRemoveBtn">
-                  ✕
-                </div>
-              </div>
-
-              <div class="flowEditorAddSelectItemBtn">
+              <div class="addSelectItemBtn">
+                <input type="hidden" value="1">
                 選択肢の追加 ⊕
               </div>
             </fieldset>
@@ -160,7 +176,12 @@
   <script src="./src/data/dataManager.js"></script>
 
   <!-- components -->
-  <!-- inputContainer -->
+  <!-- flowEditor -->
+  <script src="./src/components/flowEditor/update.js"></script>
+  <script src="./src/components/flowEditor/selectItem/add.js"></script>
+  <script src="./src/components/flowEditor/selectItem/remove.js"></script>
+
+  <!-- inputContainer --> 
   <script src="./src/components/inputContainer/add.js"></script>
   <script src="./src/components/inputContainer/remove.js"></script>
   <script src="./src/components/inputContainer/update.js"></script>
@@ -168,8 +189,6 @@
   <!-- pathmap -->
   <script src="./src/components/pathmap/update.js"></script>
 
-  <!-- flowEditor -->
-  <script src="./src/components/flowEditor/update.js"></script>
 
   <script src="./src/main.js"></script>
 </body>

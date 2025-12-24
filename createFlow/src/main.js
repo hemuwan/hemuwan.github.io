@@ -21,7 +21,18 @@ app.getElementsByClassName('wrapper')[0].onclick = (event) => {
   } else if (inputContainer) {
     viewInputEditor(inputContainer);
   }
-}
+};
+
+app.getElementsByClassName('flowEditorBody')[0].onclick = (event) => {
+  const {target} = event;
+  const {classList} = target;
+
+  if (classList.contains('addSelectItemBtn')) {
+    addSelectItem(target, managedData);
+  } else if (classList.contains('removeSelectItemBtn')) {
+    removeSelectItem(target);
+  }
+};
 
 // 初期表示
 updateInputContainer(managedData);
