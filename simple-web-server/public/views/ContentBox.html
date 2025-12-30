@@ -1,0 +1,21 @@
+<template>
+  <style>
+    .ContentBox {
+      height: 100%;
+      width: calc(100% - var(--sidebar-width));
+      position: fixed;
+      top: 0;
+      left: var(--sidebar-width);
+      transition: 0.2s ease;
+
+      &.Sidebar-close {
+        width: 100%;
+        left: 0;
+      }
+    }
+  </style>
+
+  <div class="ContentBox Sidebar-close">
+    <main></main>
+  </div>
+</template>

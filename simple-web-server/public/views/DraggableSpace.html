@@ -1,0 +1,84 @@
+<template>
+  <style>
+    .DraggableSpace {
+      padding: 8px;
+      background-color: #fff9f9;
+      height: 86vh;
+      overflow: scroll;
+
+      .row {
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+
+        .padding {
+          padding: 5px;
+          flex: 0;
+
+          &.active {
+            background-color: #ff8d8d;
+          }
+        }
+
+        .panel {
+          flex: 1;
+
+          .header {
+            background-color: tomato;
+            padding: 8px;
+            /* flex: 0; */
+          }
+
+          .body {
+            background-color: aquamarine;
+            padding: 16px;
+            flex: 1;
+          }
+        }
+      }
+    }
+  </style>
+
+  <div class="DraggableSpace">
+
+    <div class="row">
+      <div class="panel">
+        <h3 class="title">
+          panel1
+        </h3>
+        <div class="body" draggable="false">
+          各 panel をドラッグ操作で動かすことができるサンプルです。<br>
+          任意の panel をドラッグ、要素の境界にドロップすると、その位置に panel を移動できます。
+        </div>
+      </div>
+      <div class="panel">
+        <h3 class="title">
+          panel2
+        </h3>
+        <div class="body">
+          This is a sample what the panels can be moved by dragging.
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="panel">
+        <h3 class="title">
+          panel3
+        </h3>
+        <div class="body">
+          <span style="font-size:xx-large">🍣</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="panel">
+        <h3 class="title">
+          panel4
+        </h3>
+        <div class="body">
+          The implementation is not efficient. Paddings are deleted and re-created each time the panel is moved.
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
