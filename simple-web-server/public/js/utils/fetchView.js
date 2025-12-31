@@ -1,6 +1,7 @@
 const fetchView = async (componentName) => {
   try {
-    const response = await fetch('/views/' + componentName + '.html');
+    // const response = await fetch('/views/' + componentName + '.html');
+    const response = await fetch('/simple-wev-server/public/views/' + componentName + '.html');
     const htmltext = await response.text();
     const parsed = new DOMParser().parseFromString(htmltext, 'text/html');
     const first = parsed.head.firstElementChild.content.cloneNode(true);
