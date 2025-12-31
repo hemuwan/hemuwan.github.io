@@ -10,23 +10,33 @@ const routes = {
 }
 
 const ContentBox = async () => {
+  const contentBox = await fetchView('ContentBox');
+  const header = await Header();
+  contentBox.prepend(header);
 
-  const render = async (contentBox) => {
+  const render = async () => {
     const hash = location.hash || '#Home';
     const route = routes[hash] ?? Home
     const component = await route();
 
     const [main] = contentBox.getElementsByTagName('main');
-    
+
     // 中身をごっそり引数のものと入れ替える。
     main.replaceChildren(component);
+
+    component.animate(
+      {
+        opacity: [0, 1],
+        transform: ["translateY(10px)", "translateY(0)"]
+      },
+      { duration: 200 }
+    )
+
+    // render を定義していれば実行する。
+    component.render && component.render();
   }
 
-  const contentBox = await fetchView('ContentBox');
-  const header = await Header();
-  contentBox.prepend(header);
-
-  await render(contentBox);
+  // await render(contentBox); // 最初のDOMに接続前だとうまく行かない。
 
   return [contentBox, render];
 }

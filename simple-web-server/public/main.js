@@ -9,5 +9,6 @@ const sidebar = await Sidebar();
 const [contentBox, render] = await ContentBox();
 
 app.append(sidebar, contentBox);
+render(); // DOM接続後 append したあとに実行。
 
-window.addEventListener('hashchange', () => render(contentBox));
+window.addEventListener('hashchange', render);
