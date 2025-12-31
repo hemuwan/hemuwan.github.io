@@ -1,7 +1,7 @@
 const fetchView = async (componentName) => {
   try {
-    const {href} = location;
-    const response = await fetch(href + '/views/' + componentName + '.html');
+    const {path} = location;
+    const response = await fetch(path + '/views/' + componentName + '.html');
     const htmltext = await response.text();
     const parsed = new DOMParser().parseFromString(htmltext, 'text/html');
     const first = parsed.head.firstElementChild.content.cloneNode(true);
