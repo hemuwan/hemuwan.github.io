@@ -1,6 +1,6 @@
 const fetchView = async (componentName) => {
   try {
-    const {path} = location;
+    const path = location.href.indexOf('github.io') >= 0 ? '/simple-web-server/public' : '';
     const response = await fetch(path + '/views/' + componentName + '.html');
     const htmltext = await response.text();
     const parsed = new DOMParser().parseFromString(htmltext, 'text/html');
