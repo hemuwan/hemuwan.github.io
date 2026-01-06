@@ -1,16 +1,12 @@
 import fetchView from '@utils/fetchView.js';
 
-const Sidebar = async () => {
+const Sidebar = async (routes) => {
   const sidebar = await fetchView('Sidebar');
 
   // dom へ要素やイベントを追加
   const ul = sidebar.querySelector(':scope ul');
 
-  const hashList = [
-    "Home"
-    , "Dashboard"
-    , "DraggableSpace"
-  ]
+  const hashList = Object.keys(routes);
 
   const maped = hashList.map(x => {
     const li = document.createElement('li');

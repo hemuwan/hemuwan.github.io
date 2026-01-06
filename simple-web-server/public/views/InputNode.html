@@ -1,0 +1,120 @@
+<template>
+  <style>
+    .InputNode {
+      margin: 16px 0;
+      filter: drop-shadow(4px 4px 6px #878787a1);
+
+      > .header {
+        display: flex;
+        background-color: #cdebe1;
+        padding: 2px 4px;
+        border: solid 0.1px #acacac;
+        border-radius: 8px 8px 0 0;
+        border-bottom: none;
+
+        > .title {
+          flex: 5;
+        }
+
+        > .deleteButton {
+          display: flex;
+          justify-content: center;
+          align-items: anchor-center;
+          background: #ffbaba;
+          border-radius: 50%;
+          width: 25px;
+          height: 25px;
+          margin: auto;
+          margin-left: 16px;
+          cursor: pointer;
+
+          &:hover {
+            filter: brightness(1.2);
+          }
+        }
+      }
+
+      > .body {
+        display: flex;
+        background-color: #ebffeb;
+        border: solid 0.1px #acacac;
+        border-radius: 0 0 8px 8px;
+        border-top: none;
+        min-height: 20px;
+
+        > .in-container {
+          width: max-content;
+          flex-shrink: 0;
+
+          &:has(.in-item) {
+            flex: 1;
+          }
+
+          > .in-item {
+            text-align: center;
+            position: relative;
+            margin: 2px 16px;
+            border-bottom: solid 0.1px #acacac;
+
+            &:after {
+              content: '';
+              width: 10px;
+              height: 10px;
+              background-color: rgb(38, 92, 255);
+              border-radius: 50%;
+              border: solid 2px aqua;
+              position: absolute;
+              top: 6px;
+              left: -24px;
+            }
+          }
+        }
+
+        > .out-container {
+          width: max-content;
+          flex-shrink: 0;
+          
+          &:has(.out-item) {
+            flex: 1;
+            border-left: solid 0.1px #acacac;
+          }
+
+          > .out-item {
+            text-align: center;
+            position: relative;
+            margin: 2px 16px;
+            border-bottom: solid 0.1px #acacac;
+
+            &:after {
+              content: '';
+              width: 10px;
+              height: 10px;
+              background-color: rgb(38, 92, 255);
+              border-radius: 50%;
+              border: solid 2px aqua;
+              position: absolute;
+              top: 6px;
+              right: -24px;
+            }
+          }
+        }
+      }
+    }
+  </style>
+
+  <div class="InputNode">
+    <div class="header">
+      <div class="title">
+      </div>
+      <div class="deleteButton">
+        ✕
+      </div>
+    </div>
+    <div class="body">
+      <div class="in-container">
+      </div>
+      <div class="out-container">
+      </div>
+    </div>
+  </div>
+</template>

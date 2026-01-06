@@ -1,0 +1,131 @@
+<template>
+  <style>
+    .FlowViewer {
+      > .header {
+        background-color: #decafe;
+        display: flex;
+        padding: 4px 8px;
+
+        > .breadcrumbs {
+          flex: 1;
+        }
+
+        > .action-buttons {
+          flex: 1;
+          display: flex;
+          justify-content: end;
+        }
+      }
+
+      > .body {
+        height: 84vh;
+        overflow: scroll;
+        position: relative;
+        background: linear-gradient(70deg, #dadada, #e1e2d9);
+
+        > .wrapper {
+          width: max-content;
+          height: max-content;
+          position: relative;
+          min-width: 100%;
+          padding-right: var(--flowEditor-width, 27vw);
+
+          > .pathmap {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            z-index: 0;
+          }
+
+          > .nodemap {
+            display: flex;
+            justify-content: start;
+
+            > .step-container {
+              display: flex;
+              justify-content: center;
+              height: max-content;
+              padding: 6vh 4vw;
+              position: relative;
+              z-index: 1;
+              flex-direction: column;
+            }
+
+            > .input-node {
+              position: relative;
+              min-height: 5vh;
+              min-width: 5vw;
+              z-index: 1;
+              margin: 0 16px;
+              background-color: #7bf6ff;
+              border: solid 1px #000;
+              border-radius: 8px;
+              overflow: hidden;
+
+              > .inputContainerHeaeder {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 4px 8px;
+                background-color: #5ed0e3;
+
+                > .inputContainerTitle {
+                  font-weight: bold;
+                }
+
+                > .inputContainerDeleteBtn {
+                  background: #b6b6b6;
+                  cursor: pointer;
+                  font-weight: bold;
+                  width: 16px;
+                  height: 16px;
+                  padding: 2px;
+                  text-align: center;
+                  border-radius: 50%;
+                  border: solid 0.1px #ffffff;
+                  line-height: 18px;
+
+                  &:hover {
+                    filter: invert(100%);
+                  }
+                }
+              }
+
+              > .innerFieldset {
+                border: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  </style>
+
+  <div class="FlowViewer">
+    <div class='header'>
+      <div class="breadcrumbs">
+        <a href="#Home">
+          work
+        </a>
+        <span>
+          >
+        </span>
+        <a href="#DraggableSpace">
+          checksheet
+        </a>
+      </div>
+      <div class="action-buttons">
+
+        <button>
+          保存
+        </button>
+      </div>
+    </div>
+    <div class='body'>
+      <div class='wrapper'>
+        <svg class='pathmap'></svg>
+        <div class='nodemap'></div>
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,273 @@
+<template>
+  <style>
+    .FlowEditor {
+      height: 80vh;
+      width: var(--flowEditor-width, 27vw);
+      position: fixed;
+      top: 101px;
+      right: 19px;
+      z-index: 1;
+      transition: 0.2s ease;
+      background: linear-gradient(70deg, #c39fff87, #c5ffafad);
+      border-radius: 8px;
+
+      &.close {
+        right: calc(var(--flowEditor-width, 27vw) * -1);
+
+        >.header >.close-btn {
+          left: -46px;
+          rotate: 181deg;
+        }
+      }
+
+      >.header {
+        background: linear-gradient(70deg, #dcc7ff87, #afb6ff7e);
+        height: 3vh;
+        padding: 0 8px;
+        position: relative;
+        border: solid 0.1px #acacac;
+        border-bottom: none;
+        border-radius: 8px 8px 0px 0px;
+
+        >.close-btn {
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          text-align: center;
+          padding: 4px;
+          border-radius: 50%;
+          background-color: #f4cafe;
+          cursor: pointer;
+          z-index: 1;
+
+          &:hover {
+            filter: brightness(0.7);
+          }
+        }
+
+        >.title {
+          text-align: center;
+        }
+        
+      }
+
+      >.body {
+        padding: 10px 4px 10px 10px;
+        height: 73vh;
+        overflow-y: scroll;
+        position: relative;
+        backdrop-filter: blur(10px);
+        border: solid 0.1px #acacac;
+        border-top: none;
+        border-radius: 0px 0px 8px 8px;
+
+        .selectItemWrapper {
+
+          .selectItem {
+            padding: 8px;
+            background: #acacac;
+            margin-bottom: 8px;
+            position: relative;
+            display: flex;
+
+            .itemContent {
+              flex: 7;
+
+              .itemTitle {
+                position: relative;
+                padding: 4px;
+
+                div {
+                  font-size: 12px;
+                }
+
+                input,
+                select {
+                  width: 96%;
+                }
+              }
+
+              .itemSelect {
+                position: relative;
+                padding: 4px;
+
+                div {
+                  font-size: 12px;
+                }
+
+                input,
+                select {
+                  width: 100%;
+                }
+              }
+            }
+
+
+            .removeSelectItemBtn {
+              flex: 1;
+              background: #ff7b7b;
+              cursor: pointer;
+              font-weight: bold;
+              padding: 2px;
+              text-align: center;
+              border: solid 0.1px #ffffff;
+              line-height: 18px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              &:hover {
+                filter: invert(100%);
+              }
+            }
+          }
+        }
+
+        .addSelectItemBtn {
+          padding: 4px;
+          text-align: center;
+          background: #b2ffc4;
+          cursor: pointer;
+
+
+          &:hover {
+            filter: brightness(70%);
+          }
+        }
+
+      }
+    }
+  </style>
+
+  <div class='FlowEditor close'>
+    <div class='header'>
+      <div class="title">
+        Flow Editor
+      </div>
+      <div class="close-btn">
+        >>
+      </div>
+    </div>
+    <div class='body'>
+      <fieldset>
+        <legend>
+          title
+        </legend>
+        <input name="flow-title" type="text" value="タイトルだよ">
+      </fieldset>
+      <fieldset>
+        <legend>
+          type
+        </legend>
+        <select>
+          <option value="">タイプ選択</option>
+          <option value="text">テキスト</option>
+          <option value="radio">ラジオボタン</option>
+          <option value="checkbox">チェックボックス</option>
+          <option value="select">セレクトボックス</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <legend>
+          選択肢の編集
+        </legend>
+
+        <div class="selectItemWrapper">
+          <div class="selectItem">
+            <div class="itemContent">
+              <div class="itemTitle">
+                <div>
+                  表示テキスト
+                </div>
+                <input type="text">
+              </div>
+              <div class="itemSelect">
+                <div>
+                  次の選択肢
+                </div>
+                <select>
+                  <option value="">終了</option>
+                  <option value="step1">ステップ1</option>
+                  <option value="step2">ステップ2</option>
+                  <option value="step3">ステップ3</option>
+                </select>
+              </div>
+            </div>
+            <div class="removeSelectItemBtn">
+              <div>
+                ✕
+              </div>
+            </div>
+          </div>
+
+          <div class="selectItem">
+            <div class="itemContent">
+              <div class="itemTitle">
+                <div>
+                  表示テキスト
+                </div>
+                <input type="text">
+              </div>
+              <div class="itemSelect">
+                <div>
+                  次の選択肢
+                </div>
+                <select>
+                  <option value="">終了</option>
+                  <option value="step1">ステップ1</option>
+                  <option value="step2">ステップ2</option>
+                  <option value="step3">ステップ3</option>
+                </select>
+              </div>
+            </div>
+            <div class="removeSelectItemBtn">
+              <div>
+                ✕
+              </div>
+            </div>
+          </div>
+
+          <div class="selectItem">
+            <div class="itemContent">
+              <div class="itemTitle">
+                <div>
+                  表示テキスト
+                </div>
+                <input type="text">
+              </div>
+              <div class="itemSelect">
+                <div>
+                  次の選択肢
+                </div>
+                <select>
+                  <optgroup label="基本">
+                    <option value="">終了</option>
+                  </optgroup>
+                  <optgroup>
+                    <option value="step1">ステップ1</option>
+                    <option value="step2">ステップ2</option>
+                  </optgroup>
+                  <optgroup>
+                    <option value="step3">ステップ3</option>
+                  </optgroup>
+
+                </select>
+              </div>
+            </div>
+            <div class="removeSelectItemBtn">
+              <div>
+                ✕
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="addSelectItemBtn">
+          <input type="hidden" value="1">
+          選択肢の追加 ⊕
+        </div>
+      </fieldset>
+
+    </div>
+  </div>
+</template>
