@@ -1,0 +1,16 @@
+<svg
+  width="200"
+  height="200"
+  viewBox="0 0 200 200"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="
+      M 40 40
+      A 70 70 0 1 0 120 140
+      A 55 55 0 1 1 140 40
+      Z
+    "
+    fill="#e53935"
+  />
+</svg>

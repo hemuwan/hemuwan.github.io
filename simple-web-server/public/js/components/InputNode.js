@@ -3,9 +3,28 @@ import fetchView from '@utils/fetchView.js';
 const InputNode = async (data, itemData) => {
   const inputNode = await fetchView('InputNode');
 
-  inputNode.setAttribute('node-id', itemData.id ?? '');
-  inputNode.setAttribute('step', itemData.step ?? '');
-  inputNode.setAttribute('row', itemData.row ?? '');
+  // 使えないデータが入ってはならない。
+  if (!itemData.id) throw new Error("不正なitemdata", itemData);
+
+  // dataset を使うほうが良いかも
+  inputNode.id = itemData.id ?? '';
+  inputNode.step = itemData.step ?? '';
+  inputNode.row = itemData.row ?? '';
+
+  // node 削除
+  const [deleteBtn] = inputNode.getElementsByClassName('input-node-delete');
+  deleteBtn.onclick = (event) => {
+    const stepContainer = event.target.closest('.step-container');
+    const nodeList = stepContainer.querySelectorAll('.InputNode');
+
+    if (nodeList.length <= 1) {
+      stepContainer.remove();
+    } else {
+      const addBtn = inputNode.previousElementSibling;
+      addBtn.remove();
+      inputNode.remove();
+    }
+  }
 
   const title = inputNode.querySelector(':scope > .header > .title');
   title.textContent = itemData.title ?? 'new node';
@@ -16,7 +35,12 @@ const InputNode = async (data, itemData) => {
     const outItem = document.createElement('div');
     outItem.classList.add('out-item');
     outItem.textContent = content.label;
-    outItem.setAttribute('next-id', content.next_id);
+    const address = [
+      'from', itemData.id
+      , 'to', content.next_id
+      , 'item', content.label 
+    ].join('-');
+    outItem.setAttribute(address, '');
     outContainer.append(outItem);
   });
 
@@ -24,12 +48,17 @@ const InputNode = async (data, itemData) => {
   const inContainer = inputNode.querySelector(':scope > .body > .in-container');
   const beforeStepData = data ? data.filter(x => x.step < parseInt(itemData.step)) : [];
   beforeStepData.forEach(x => {
-    x.content.forEach(y => {
+    x.content && x.content.forEach(y => {
       if (y.next_id == itemData.id) {
         const inItem = document.createElement('div');
         inItem.classList.add('in-item');
         inItem.textContent = y.label;
-        inItem.setAttribute('from_id', x.id);
+        const address = [
+          'from', x.id
+          , 'to', y.next_id
+          , 'item', y.label 
+        ].join('-')
+        inItem.setAttribute(address, '');
         inContainer.append(inItem);
       }
     });

@@ -12,7 +12,7 @@ const createFlow = async (data) => {
   const createStepContainer = (stepNum) => {
     const stepContainer = document.createElement('div');
     stepContainer.classList.add('step-container');
-    stepContainer.setAttribute('step', stepNum);
+    stepContainer.dataset.step = stepNum;
     return stepContainer;
   }
 
@@ -23,7 +23,7 @@ const createFlow = async (data) => {
     addInputNode.classList.add('input-node-add');
     addInputNode.onclick = async (event) => {
       const parent = event.target.closest('.step-container');
-      const stepNum = parent.getAttribute('step');
+      const stepNum = parent.dataset.step;
       const newItem = {
         id: Math.max(...data.map(x => x.id)) + 1
         , step: stepNum
@@ -60,9 +60,29 @@ const createFlow = async (data) => {
   // 最後のステップコンテナ
   const maxStep = Math.max(...stepList) + 1;
   const addInputNode = createAddInputNode();
-  addInputNode.setAttribute('step', maxStep);
   addInputNode.classList.add('last-step');
   addInputNode.textContent = '入力フィールドを追加する';
+  addInputNode.onclick = async (event) => {
+    const stepContainer = event.target.closest('.step-container');
+    const stepNum = stepContainer.dataset.step;
+    stepContainer.dataset.step = stepNum + 1;
+
+    const maxId = Math.max(...data.map(x => x.id)) + 1;
+    const newItem = {
+      id: maxId
+      , step: stepNum
+      , title: ''
+      , type: ''
+      , content: []
+    };
+
+    const newStep = createStepContainer(stepNum);
+    newStep.append(createAddInputNode());
+    newStep.append(await InputNode(data, newItem));
+    newStep.append(createAddInputNode());
+
+    stepContainer.before(newStep);
+  }
   const lastStep = createStepContainer(maxStep);
   lastStep.append(addInputNode);
   stepContainerList.push(lastStep);
