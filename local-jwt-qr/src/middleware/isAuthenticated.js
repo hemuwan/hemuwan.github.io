@@ -1,7 +1,9 @@
 // local 認証用のミドルウェア
-module.exports = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next();
+const isAuthenticated = (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/auth/signin');
   }
-  res.redirect('/auth/signin');
+  return next();
 }
+
+module.exports = isAuthenticated;

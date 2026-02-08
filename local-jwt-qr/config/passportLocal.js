@@ -9,26 +9,24 @@ const users = Array(300).fill(null).map((_, i) => {
   return {
     id,
     username,
-    emailaddress: `${username}@example.com`,
+    email: `${username}@example.com`,
     password: username
   }
 });
-
-const findUserByUserEmailaddress = async (emailaddress) => {
-  return users.find(x => x.emailaddress === emailaddress);
-}
-
-const matchPassword = async (user, password) => user.password === password;
+// dummy method
+const findUserByEmail = async (email) => users.find(x => x.email === email);
+const findUserById = async (id) => users.find(x => x.id === id);
+const verifyPassword = async (user, password) => user.password === password;
 
 // 認証ロジック
 passport.use(new LocalStrategy({ usernameField: 'emailaddress'}, async (email, password, done) => {
   try {
-    const user = await findUserByUserEmailaddress(email);
+    const user = await findUserByEmail(email);
     if (!user) {
       return done(null, false, { message: 'ユーザーが存在しません'});
     }
 
-    const match = await matchPassword(user, password);
+    const match = await verifyPassword(user, password);
 
     if (!match) {
       return done(null, false, { message: 'メールアドレスかパスワードが間違っています。'});
@@ -50,7 +48,7 @@ passport.serializeUser((user, done) => {
 // のようになる
 passport.deserializeUser((id, done) => {
   try {
-    const user = users.find(x => x.id === id);
+    const user = findUserById(id);
     done(null, user);
   } catch (err) {
     done(err);
@@ -64,9 +62,9 @@ module.exports = (app) => {
     , resave: false // セッションを常に保存し直すかどうか
     , saveUninitialized: false // 未初期化のセッションを保存するかどうか
     , cookie: {
-      maxAge: 12 * 60 * 60 * 1000 // 12h
-      , secure: false // HTTPS を使う場合は true にする
+      secure: false // HTTPS を使う場合は true にする
       , httpOnly: true // クライアント側の JavaScript から参照できないようにする
+      // , maxAge: 12 * 60 * 60 * 1000 // 12h // 指定しなければブラウザ終了まで
     }
   }));
   

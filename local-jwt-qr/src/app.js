@@ -4,6 +4,9 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+// 環境変数の設定
+require('./config.json.js')();
+
 // passport local の設定を読み込み
 require('../config/passportLocal')(app);
 
