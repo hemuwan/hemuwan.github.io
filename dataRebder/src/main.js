@@ -245,9 +245,9 @@ const store = (init) => {
     }
     , undo: () => {
       historyIndex = historyIndex + 1;
-      if (historyIndex >= 9) {
+      if (historyIndex >= maxHistory - 1) {
         // 履歴が10こ貯まったらボタンを押せないように
-        historyIndex = 9;
+        historyIndex = maxHistory - 1;
         document.querySelector('.undo').disabled = true;
       } else if (dataHistory.length <= historyIndex + 1) {
         // 履歴の数にindexが追いついたらボタンを押せないように
