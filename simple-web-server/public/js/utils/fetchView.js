@@ -7,7 +7,8 @@ const fetchView = async (componentName) => {
     const first = parsed.head.firstElementChild.content.cloneNode(true);
     const style = first.querySelector('style');
     if (style && !document.head.querySelector(`style[data-style="${componentName}"]`)) {
-      style.setAttribute('data-style', componentName);
+      // style.setAttribute('data-style', componentName);
+      style.dataset.style = componentName;
       document.head.append(style); // 移動する
     } else if (style) {
       style.remove();
